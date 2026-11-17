@@ -5,7 +5,7 @@ This is YOUR file. We'll fill in the TODOs together, top to bottom:
 
     STEP 1  Talk to an AI model        TODO 1
     STEP 2  Give it a memory           TODO 2a, 2b
-    STEP 3  Build some tools           TODO 3a, 3b, 3c, 3d
+    STEP 3  Build some tools           TODO 3a, 3b, 3c, 3d, 3e
     STEP 4  The agent loop             TODO 4
 
     Run it:   python my_agent.py      (type 'quit' to stop)
@@ -106,6 +106,19 @@ TOOL_SCHEMAS = [
 # TODO 3d: Add your new tools to this dictionary: "tool_name": function_name
 TOOLS = {"calculate": calculate}
 
+# TODO 3e: The model still can't SEE your tools: you have to send them with
+#          every request. Scroll up to ask_agent() and replace its last two
+#          lines with:
+#
+#   response = client.chat.completions.create(model=MODEL, messages=messages, tools=TOOL_SCHEMAS)
+#   reply = response.choices[0].message
+#   if reply.tool_calls:  # the model is asking US to run a tool
+#       call = reply.tool_calls[0]
+#       return f"(I want to call {call.function.name}({call.function.arguments}), but I can't run tools until Step 4!)"
+#   return reply.content
+#
+#   Then ask "what time is it?" and watch the model ask for your tool.
+
 
 def run_tool(name, arguments):
     """Run one tool and always return text, even if something goes wrong."""
@@ -126,12 +139,10 @@ def run_tool(name, arguments):
 #         send back the results
 #     return the model's final answer
 #
-# TODO 4: Scroll back up to ask_agent() from Step 1 and upgrade it:
-#   - add tools=TOOL_SCHEMAS to the create(...) call
-#   - wrap the call in:  for _ in range(MAX_STEPS):
-#   - reply = response.choices[0].message
+# TODO 4: Scroll back up to ask_agent() and upgrade it into a loop:
+#   - wrap the create(...) call in:  for _ in range(MAX_STEPS):
 #   - if reply.tool_calls is empty -> return reply.content (the final answer)
-#   - otherwise save the request with
+#   - otherwise, instead of returning, save the request with
 #       messages.append(reply.model_dump(exclude_none=True)),
 #     run each tool with run_tool(...),
 #     append each result as {"role": "tool", ...}, and loop again

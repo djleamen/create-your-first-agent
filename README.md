@@ -97,7 +97,7 @@ You'll write your agent in **`my_agent.py`**. It runs right now (try `python my_
 |---|---|---|---|
 | 1 | Send a message to an AI model | TODO 1 | `solutions/step1_first_call.py` |
 | 2 | Give it memory so it can hold a conversation | TODO 2a, 2b | `solutions/step2_chat_loop.py` |
-| 3 | Write tools and describe them to the model | TODO 3a–3d | `solutions/step3_tools.py` |
+| 3 | Write tools and hand them to the model | TODO 3a–3e | `solutions/step3_tools.py` |
 | 4 | The agent loop: let the model use tools on its own | TODO 4 | `solutions/step4_agent.py` |
 
 **Fell behind? No problem.** Each solution file is `my_agent.py` with every TODO up to that step already done (the later TODOs are still there for you). Copy the matching one over your `my_agent.py` and keep going, or just run it:
